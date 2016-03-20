@@ -1,0 +1,30 @@
+{% extends 'mainapp/main_frame.html' %}
+{% block title %}All Articles{% endblock %}
+{% block content %}
+<input type="search" class="table-filter" data-table="order-table" placeholder="Filter">
+
+<table class="table table-hover order-table">
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Author</th>
+            <th>Published</th>
+        </tr>
+    </thead>
+    {% for item in articles %}
+        <tr onclick="location.href = '{% url 'mainapp:get_article' item.id %}'">
+            <td>{{ item.name }}</td>
+            <td>
+                {% if item.authors.all %}
+                    {% with item.authors.all|first as author %}
+                        <a href="{% url 'mainapp:get_person' author.id %}">{{ author.short_name}}</a>
+                    {% endwith %}
+                {% else %}
+                    no author
+                {% endif %}
+            </td>
+            <td>{{ item.publication_date|date:"Y" }}</td>
+        </tr>
+    {% endfor %}
+</table>
+{% endblock %}

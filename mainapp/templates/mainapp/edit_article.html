@@ -1,0 +1,50 @@
+{% extends 'mainapp/main_frame.html' %}
+{% block title %}{{ title }}{% endblock %}
+{% block content %}
+<form action="{{ action_url }}" method="post" class="form-horizontal" role="form">
+    {% csrf_token %}
+    <div class="form-group">
+        <label for="createArticle_name"
+               class="control-label col-sm-2">Title:</label>
+        <div class="col-sm-10">
+            <input name="name" id="createArticle_name"
+                   class="form-control" placeholder="Enter title" value="{{ article.name }}">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="createArticle_description"
+               class="control-label col-sm-2">Description:</label>
+        <div class="col-sm-10">
+            <textarea name="description" id="createArticle_description"
+                      class="form-control" placeholder="Enter description" >{{ article.description }}</textarea>
+        </div>
+
+    </div>
+    <!-- TODO make search and tags for selected authors -->
+    <div class="form-group">
+        <label for="createArticle_authors" class="control-label col-sm-2">Author:</label>
+        <div class="col-sm-10">
+            <select multiple="multiple" name="authors" class="form-control"
+                    id="createArticle_authors">
+                {% for item in all_authors %}
+                    <option value="{{ item.id }}" {% if item in article.authors.all %}selected{% endif %}>{{ item.short_name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="createArticle_publicationDate"
+               class="control-label col-sm-2">Published:</label>
+        <div class="col-sm-10">
+            <input name="publication_date" id="createArticle_publicationDate"
+                   class="form-control" placeholder="dd/mm/yyyy" value="{{ article.publication_date|date:"d/m/Y" }}"/>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+            <button type="submit" class="btn btn-default">{{ action }}</button>
+        </div>
+    </div>
+
+</form>
+{% endblock %}

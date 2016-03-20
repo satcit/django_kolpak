@@ -1,0 +1,45 @@
+{% extends 'mainapp/main_frame.html' %}
+{% block title %}{{ title }}{% endblock %}
+{% block content %}
+<form action="{{ action_url }}" method="post" role="form" class="form-horizontal">
+    {% csrf_token %}
+    <div class="form-group">
+        <label for="createPerson_name"
+               class="control-label col-sm-2">Name:</label>
+        <div class="col-sm-10">
+            <input name="name" id="createPerson_name"
+                   class="form-control" placeholder="Enter name" value="{{ person.name }}" />
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="createPerson_surname"
+               class="control-label col-sm-2">Surname:</label>
+        <div class="col-sm-10">
+            <input name="surname"  id="createPerson_surname"
+                   class="form-control" placeholder="Enter surname" value="{{ person.surname }}" />
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="createPerson_description"
+               class="control-label col-sm-2">Description:</label>
+        <div class="col-sm-10">
+            <textarea name="description" id="createPerson_description"
+                      class="form-control" placeholder="Enter description" >{{ person.description }}</textarea>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="createPerson_birthDate"
+               class="control-label col-sm-2">Birth date:</label>
+        <div class="col-sm-10">
+            <input name="birth_date" id="createPerson_birthDate"
+                   class="form-control" placeholder="dd/mm/yyyy" value="{{ person.birth_date|date:'d/m/Y' }}"/>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+            <button type="submit" class="btn btn-default">{{ action }}</button>
+        </div>
+    </div>
+
+</form>
+{% endblock %}

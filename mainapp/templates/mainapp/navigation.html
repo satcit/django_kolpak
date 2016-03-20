@@ -1,0 +1,31 @@
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="{% url 'mainapp:index' %}">Kolpak</a>
+        </div>
+        <ul class="nav navbar-nav">
+            <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown"
+                   href="{% url 'mainapp:get_articles' %}">
+                    Articles
+                    <span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu">
+                    <li><a href="{% url 'mainapp:get_articles' %}">All articles</a></li>
+                    <li><a href="{% url 'mainapp:create_article' %}">Add Article</a></li>
+                </ul>
+            </li>
+            <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown"
+                   href="{% url 'mainapp:get_persons' %}">
+                    Persons
+                    <span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                    <li><a href="{% url 'mainapp:get_persons' %}">All Persons</a></li>
+                    <li><a href="{% url 'mainapp:create_person' %}">Add Person</a></li>
+                </ul>
+            </li>
+            <li class="inactive"><a href="{% url 'mainapp:get_tasks' %}">Tasks</a></li>
+        </ul>
+    </div>
+</nav>

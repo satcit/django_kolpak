@@ -1,0 +1,57 @@
+{% extends 'mainapp/main_frame.html' %}
+{% block title %}{{ person.surname }}{% endblock %}
+{% block content %}
+<div class="row">
+    <div class="col-sm-4">
+        <button type="button" class="btn btn-default"
+                onclick="location.href = '{% url 'mainapp:edit_person' person.id %}'">Edit</button>
+    </div>
+    <div class="col-sm-8 text-right">
+        {{ person.birth_date|date:"d-M-Y" }}
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-12 text-center">
+        <h4><b>{{ person.name }} {{ person.surname }}</b></h4>
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-12 text-center">Description</div>
+</div>
+<div class="row">
+    <div class="col-sm-12">{{ person.description }}</div>
+</div>
+
+<!--tabs-->
+<ul class="nav nav-tabs" role="tablist">
+    <li class="active">
+        <a href="#person_comments" role="tab" data-toggle="tab">Comments</a>
+    </li>
+    <li><a href="#person_history" role="tab" data-toggle="tab">History</a></li>
+    <li><a href="#person_articles" role="tab" data-toggle="tab">Articles</a></li>
+</ul>
+
+<!--tabs content-->
+<div class="tab-content createArticle_tabContent">
+    <div class="tab-pane fade active in" id="person_comments">
+        <div class="row">
+            {% include 'mainapp/create_comment.html' with action='mainapp:create_person_comment' commented_id=person.id %}
+        </div>
+        <div class="row">
+            <div class="col-sm-12">{% include 'mainapp/comments.html' with commented=person %}</div>
+        </div>
+    </div>
+    <div class="tab-pane fade" id="person_history">
+    </div>
+    <div class="tab-pane fade" id="person_articles">
+        <table class="table table-hover">
+            {% for item in person.articles.all %}
+                <tr onclick="location.href = '{% url 'mainapp:get_article' item.id %}'">
+                    <td>{{ item.name }}</td>
+                    <td>{{ item.publication_date|date:"M-Y" }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+</div>
+{% endblock %}

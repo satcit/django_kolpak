@@ -1,0 +1,23 @@
+{% load staticfiles %}
+<html>
+<head>
+    <title>{% block title %}{% endblock %}</title>
+
+
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <link href="{% static 'mainapp/style.css' %}" rel="stylesheet">
+    <script src="{% static 'mainapp/table_filter.js' %}"></script>
+
+</head>
+<body>
+
+{% include 'mainapp/navigation.html' %}
+<div class="container-fluid">
+    {% block content %}{% endblock %}
+</div>
+
+
+</body>
+</html>

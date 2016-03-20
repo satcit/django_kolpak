@@ -1,0 +1,6 @@
+{% for item in commented.comment_set.all %}
+    <div class="row">
+        <div class="col-sm-8">{{ item.text }}</div>
+        <div class="col-sm-4">{{ item.date|date:"d-M-Y H:i" }}</div>
+    </div>
+{% endfor %}
